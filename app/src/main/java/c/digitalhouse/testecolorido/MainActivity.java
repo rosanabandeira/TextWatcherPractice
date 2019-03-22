@@ -1,5 +1,6 @@
 package c.digitalhouse.testecolorido;
 
+import android.graphics.Color;
 import android.support.design.widget.TextInputEditText;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -18,14 +19,14 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate( savedInstanceState );
-        setContentView( R.layout.activity_main );
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
 
-        editText = findViewById( R.id.editText );
-        textView = findViewById( R.id.textView );
-        button = findViewById( R.id.button );
+        editText = findViewById(R.id.editText);
+        textView = findViewById(R.id.textView);
+        button = findViewById(R.id.button);
 
-        editText.addTextChangedListener( new TextWatcher() {
+        editText.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
@@ -35,22 +36,42 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 String textInput = editText.getText().toString().trim();
-                textView.setText( s );
-                button.setEnabled( !textInput.isEmpty() );
+                textView.setText(" ");
+
 
             }
+
 
             @Override
             public void afterTextChanged(Editable s) {
 
-                if (editText.length() > 3) {
-                    button.setEnabled( true );
+                if (editText.length() >= 3) {
+                    textView.setTextColor(Color.BLUE);
+                    button.setEnabled(true);
+
+                    if (editText.length() >= 10) {
+                        textView.setTextColor(Color.GREEN);
+                    }
+
                 } else {
-                    button.setEnabled( false );
+                    button.setEnabled(false);
                 }
 
             }
-        } );
+        });
+
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                textView.setText(editText.getEditableText());
+
+
+
+
+
+            }
+        });
 
 
     }
@@ -59,4 +80,6 @@ public class MainActivity extends AppCompatActivity {
 
 
     }
+
+
 }
