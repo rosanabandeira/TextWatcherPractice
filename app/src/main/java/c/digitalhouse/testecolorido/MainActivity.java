@@ -21,13 +21,14 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate( savedInstanceState );
         setContentView( R.layout.activity_main );
 
-        editText = findViewById(R.id.editText);
+        editText = findViewById( R.id.editText );
         textView = findViewById( R.id.textView );
-        button = findViewById(R.id.button);
+        button = findViewById( R.id.button );
 
         editText.addTextChangedListener( new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
 
             }
 
@@ -35,20 +36,27 @@ public class MainActivity extends AppCompatActivity {
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 String textInput = editText.getText().toString().trim();
                 textView.setText( s );
-                button.setEnabled( !textInput.isEmpty());
+                button.setEnabled( !textInput.isEmpty() );
 
             }
 
             @Override
             public void afterTextChanged(Editable s) {
 
+                if (editText.length() > 3) {
+                    button.setEnabled( true );
+                } else {
+                    button.setEnabled( false );
+                }
+
             }
         } );
-
 
 
     }
 
     public void executarAcao(View view) {
+
+
     }
 }
